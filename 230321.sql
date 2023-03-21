@@ -115,3 +115,13 @@ select A.직원ID
 , B.연락처
 from 직원 A, 직원연락처 B
 where A.직원ID = B.직원ID ;
+
+//JOIN
+select A.직원ID
+, A.이름
+, A.연봉
+, B.연락처
+from 직원 A, 직원연락처 B
+where A.직원ID = B.직원ID
+and A.직원ID = 'A0006'
+and B.구분코드 = '휴대폰';
