@@ -45,6 +45,81 @@ COMMIT;
 SELECT * FROM 수강생정보 ;
 SELECT * FROM 성적표 ;
 
-select 소속반 , count(*) as 반별인원수
+select 소속반 , 학생이름
 from 수강생정보
 group by 소속반 ;
+
+-- count() ,avg(), sum(), max() , min()
+select 소속반, count(*)
+from 수강생정보
+group by 소속반;
+
+--집계함수의 종류
+
+select 학생ID, ROUND (AVG(성적), 1) as 성적
+from 성적표
+group by 학생ID ;
+
+select 학생ID, round(avg(성적) ,1) as 평균성적
+from 성적표
+group by 학생ID ;
+
+select max(연봉) as 최고연봉, min(연봉) as 최저연봉
+from 직원 ;
+
+select 소속반, count(*)
+from 수강생정보
+group by 소속반;
+
+select 학생ID, avg(성적) as 수학제외한평균
+from 성적표
+where 과목 != '수학'
+group by 학생ID;
+
+select 부서ID, sum(연봉) as 부서별연봉합계
+from 직원
+group by 부서ID;
+
+select a.직원ID, count(b.연락처) as 연락처개수
+from 직원 a, 직원연락처 b
+where a.직원ID = b.직원ID(+)
+group by a.직원ID;
+
+--having
+select 학생ID, round( avg(성적) , 1) as 평균성적
+from 성적표
+group by 학생ID
+having avg(성적) <= 75;
+
+select 소속반, count(*) as 인원수
+from 수강생정보
+group by 소속반
+having count(*) >= 3;
+
+select 부서ID, max(연봉) as 최고연봉
+from 직원
+group by 부서ID
+having max(연봉) = 7500;
+
+select 학생ID, round (avg(성적) ,1) as 평균성적
+from 성적표
+group by 학생ID
+having avg(성적) is not null;
+
+
+--ORDER BY
+select *
+from 직원
+order by 이름 desc ;
+
+select *
+from 직원
+order by 부서ID, 이름 DESC;
+
+select 직원ID
+, 이름
+, 연봉 as 직원들의연봉
+, 연봉 * 01. as 보너스
+from 직원
+order by 3;
+
